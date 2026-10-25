@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="gu" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Chemical Engineering - Student Portal</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            script: ['Caveat', 'cursive'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0072db',
+              600: '#005bb5',
+              700: '#00478f',
+              800: '#003366',
+              900: '#001f3f',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .industrial-pattern {
+      background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-100 font-sans text-slate-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col">
+
+  <!-- Toast Notification Box -->
+  <div id="toast-container" class="fixed top-4 left-4 right-4 sm:left-auto sm:right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- MAIN WRAPPER -->
+  <div id="app" class="min-h-screen flex flex-col w-full relative">
+
+    <!-- ============================================================== -->
+    <!-- 1. AUTH SCREEN: LOGIN PAGE                                     -->
+    <!-- ============================================================== -->
+    <section id="view-login" class="flex flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen relative overflow-hidden">
+      
+      <div class="hidden lg:block absolute bottom-0 left-8 w-72 opacity-25 pointer-events-none text-brand-900 select-none">
+        <p class="font-script text-3xl text-brand-700 font-bold rotate-[-6deg] text-center leading-tight">Learn<br>Grow<br>Excel</p>
+      </div>
+
+      <div class="hidden lg:block absolute top-10 right-10 text-right opacity-30 pointer-events-none select-none">
+        <p class="font-script text-3xl text-brand-800 font-bold rotate-[-3deg] leading-tight">Engineering Today<br>for a Better Tomorrow</p>
+      </div>
+
+      <!-- Login Card -->
+      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-10 relative z-10">
+        
+        <div class="flex flex-col items-center text-center mb-6">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-brand-800 to-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 mb-3 relative">
+            <i class="fa-solid fa-gear text-3xl sm:text-4xl opacity-30 absolute animate-spin" style="animation-duration: 20s;"></i>
+            <i class="fa-solid fa-flask-vial text-2xl sm:text-3xl relative z-10 text-white"></i>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-brand-900 tracking-tight">Chemical Engineering</h1>
+          <p class="text-xs font-semibold uppercase tracking-wider text-brand-500 mt-0.5">Student Portal</p>
+          <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-slate-400 mt-1">
+            <span>Learn</span> • <span>Explore</span> • <span>Perform</span>
+          </div>
+        </div>
+
+        <div class="text-center mb-5">
+          <h2 class="text-lg sm:text-xl font-bold text-slate-800">Welcome Back</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Login to access your account</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" class="space-y-4" onsubmit="event.preventDefault(); handleLoginSubmit();">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-regular fa-envelope"></i>
+              </span>
+              <input type="email" id="login-email" required placeholder="student@example.com"
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-slate-50/50">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block text-xs font-semibold text-slate-600">Password</label>
+              <button type="button" onclick="openForgotPasswordModal()" class="text-[11px] font-semibold text-brand-500 hover:text-brand-700 transition hover:underline">
+                Forgot Password?
+              </button>
+            </div>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+              <input type="password" id="login-password" required placeholder="••••••••"
+                class="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-slate-50/50">
+              <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-login-submit"
+            class="w-full py-3.5 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-semibold rounded-xl shadow-lg shadow-brand-500/25 transition flex items-center justify-center gap-2 cursor-pointer mt-2">
+            <span>Login</span>
+            <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+          </button>
+        </form>
+
+        <div class="relative my-6 text-center">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-slate-200"></div>
+          </div>
+          <span class="relative bg-white px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">OR</span>
+        </div>
+
+        <div class="text-center">
+          <p class="text-xs text-slate-500 mb-2">New user?</p>
+          <button type="button" onclick="showView('view-register')"
+            class="w-full py-2.5 px-4 border border-brand-500 text-brand-600 hover:bg-brand-50 active:bg-brand-100 font-semibold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm cursor-pointer">
+            <i class="fa-regular fa-user"></i>
+            <span>Register a new account</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 2. REGISTER ACCOUNT SCREEN                                     -->
+    <!-- ============================================================== -->
+    <section id="view-register" style="display:none;" class="flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen">
+      
+      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-8 relative z-10">
+        
+        <div class="flex items-center gap-3 pb-3 mb-2 border-b border-slate-100">
+          <button type="button" onclick="showView('view-login')" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer">
+            <i class="fa-solid fa-arrow-left text-sm"></i>
+          </button>
+          <h2 class="text-lg font-bold text-slate-800">Register Account</h2>
+        </div>
+
+        <form id="form-register" class="space-y-3.5 mt-3" onsubmit="event.preventDefault(); handleRegisterSubmit();">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-regular fa-user text-sm"></i>
+            </span>
+            <input type="text" id="reg-fullname" required placeholder="Enter Full Name"
+              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+          </div>
+
+          <div class="relative flex items-center">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 font-bold text-xs">
+              +91
+            </span>
+            <input type="tel" id="reg-phone" required pattern="[0-9]{10}" maxlength="10" placeholder="Enter Phone Number"
+              class="w-full pl-12 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+          </div>
+
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-regular fa-envelope text-sm"></i>
+            </span>
+            <input type="email" id="reg-email" required placeholder="Enter E - Mail Address"
+              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+          </div>
+
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-lock text-sm"></i>
+            </span>
+            <input type="password" id="reg-password" required minlength="6" placeholder="Enter Password"
+              class="w-full pl-10 pr-10 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+            <button type="button" onclick="togglePasswordVisibility('reg-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
+              <i class="fa-regular fa-eye-slash text-sm"></i>
+            </button>
+          </div>
+
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-location-dot text-sm"></i>
+            </span>
+            <input type="text" id="reg-district" required placeholder="Enter District"
+              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+          </div>
+
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-map-location-dot text-sm"></i>
+            </span>
+            <select id="reg-state" required
+              class="w-full pl-10 pr-10 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition appearance-none cursor-pointer">
+              <option value="" disabled selected>State</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2.5 pt-1 px-1">
+            <input type="checkbox" id="reg-terms" required
+              class="w-4 h-4 rounded text-slate-900 border-slate-300 focus:ring-slate-800 cursor-pointer">
+            <label for="reg-terms" class="text-xs text-slate-700 select-none">
+              I agree with <button type="button" onclick="showView('view-terms')" class="text-brand-600 font-semibold underline hover:text-brand-800">Terms and Conditions</button>
+            </label>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" id="btn-register-submit"
+              class="w-full py-3.5 px-4 bg-slate-900 hover:bg-black active:scale-[0.98] text-white font-bold rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-sm">
+              <span id="btn-register-text">Register</span>
+            </button>
+          </div>
+        </form>
+
+        <p class="text-xs text-center text-slate-500 mt-4">
+          Already registered? 
+          <button type="button" onclick="showView('view-login')" class="text-brand-600 font-semibold hover:underline ml-1">Login here</button>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 2B. COMPLETE YOUR PROFILE SCREEN                               -->
+    <!-- ============================================================== -->
+    <section id="view-complete-profile" style="display:none;" class="flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen">
+      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-8 relative z-10">
+        
+        <div class="flex flex-col items-center text-center mb-6">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-lg mb-3">
+            <i class="fa-solid fa-graduation-cap text-2xl"></i>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-slate-800">Complete Your Profile</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Select your Semester to see your subjects</p>
+        </div>
+
+        <form id="form-complete-profile" class="space-y-3.5" onsubmit="event.preventDefault(); handleCompleteProfileSubmit();">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name *</label>
+            <input type="text" id="cp-fullname" required placeholder="Enter your full name"
+              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Enrollment Number *</label>
+            <input type="text" id="cp-enrollment" required placeholder="Enter your enrollment number"
+              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">College Name *</label>
+            <input type="text" id="cp-college" required placeholder="Enter your college name"
+              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Semester *</label>
+            <div class="relative">
+              <select id="cp-semester" required
+                class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition appearance-none cursor-pointer">
+                <option value="" disabled>Select your semester</option>
+                <option value="1st Semester">1st Semester</option>
+                <option value="2nd Semester">2nd Semester</option>
+                <option value="3rd Semester">3rd Semester</option>
+                <option value="4th Semester" selected>4th Semester</option>
+                <option value="5th Semester">5th Semester</option>
+                <option value="6th Semester">6th Semester</option>
+                <option value="7th Semester">7th Semester</option>
+                <option value="8th Semester">8th Semester</option>
+              </select>
+              <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" id="btn-cp-submit"
+              class="w-full py-3.5 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-bold rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-sm">
+              <span id="btn-cp-text">Save and Continue</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 2C. TERMS & CONDITIONS VIEW                                    -->
+    <!-- ============================================================== -->
+    <section id="view-terms" style="display:none;" class="flex-1 flex-col bg-slate-50 min-h-screen">
+      <header class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 px-4 py-3.5 flex items-center justify-between shadow-xs">
+        <div class="flex items-center gap-3">
+          <button type="button" onclick="showView('view-register')" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
+            <i class="fa-solid fa-arrow-left text-sm"></i>
+          </button>
+          <div>
+            <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Terms & Conditions</h1>
+          </div>
+        </div>
+        <button type="button" onclick="acceptTermsAndReturn()" class="px-3.5 py-1.5 bg-brand-500 text-white text-xs font-semibold rounded-xl">
+          I Agree
+        </button>
+      </header>
+
+      <div class="max-w-4xl mx-auto w-full p-4 sm:p-6 space-y-4 text-slate-700 text-sm">
+        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-4 text-xs text-sky-800">
+          <i class="fa-solid fa-shield-halved mr-1 text-brand-500"></i>
+          <strong>વિદ્યાર્થી આચારસંહિતા અને શરતો</strong>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 space-y-2">
+          <h2 class="text-sm font-bold text-slate-900">પ્રસ્તાવના અને માન્યતા</h2>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            આ પોર્ટલ Chemical Engineering ના વિદ્યાર્થીઓને શૈક્ષણિક વિષયો, અભ્યાસ સામગ્રી અને લેબ મેન્યુઅલ ઉપલબ્ધ કરાવવા માટે બનાવવામાં આવ્યું છે.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 3. STUDENT DASHBOARD SCREEN                                    -->
+    <!-- ============================================================== -->
+    <div id="view-dashboard" style="display:none;" class="flex-1 flex-col h-screen overflow-hidden bg-slate-100 relative">
+
+      <!-- SLIDE-OVER SIDEBAR MENU (TRIGGERED BY 3-LINE BUTTON) -->
+      <div id="side-menu-backdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity"></div>
+      
+      <aside id="side-menu" class="fixed top-0 left-0 bottom-0 w-72 max-w-[85vw] bg-brand-900 text-white z-50 flex flex-col justify-between p-6 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div>
+          <!-- Sidebar Header -->
+          <div class="flex items-center justify-between pb-5 border-b border-white/10">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-700/80 border border-white/20 flex items-center justify-center text-sky-300">
+                <i class="fa-solid fa-flask-vial text-lg"></i>
+              </div>
+              <div>
+                <h2 class="font-bold text-sm leading-tight">Chemical Engg.</h2>
+                <span class="text-[10px] text-sky-300">Student Portal</span>
+              </div>
+            </div>
+            <button onclick="toggleMenu()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <!-- Navigation Links (Home, Profile) -->
+          <nav class="mt-6 space-y-2">
+            <button onclick="switchTab('home'); toggleMenu();" id="nav-btn-home" class="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold text-sm transition bg-brand-600 text-white shadow-sm">
+              <i class="fa-solid fa-house w-5 text-center text-base"></i>
+              <span>Home</span>
+            </button>
+            <button onclick="switchTab('profile'); toggleMenu();" id="nav-btn-profile" class="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold text-sm transition text-white/75 hover:bg-white/10 hover:text-white">
+              <i class="fa-regular fa-user w-5 text-center text-base"></i>
+              <span>Profile</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="pt-4 border-t border-white/10">
+          <button onclick="handleSignOut()" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-semibold text-sm text-rose-200 hover:bg-rose-500/20 transition cursor-pointer">
+            <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN SCROLLABLE CONTENT -->
+      <main class="flex-1 flex flex-col overflow-y-auto custom-scroll relative">
+        
+        <!-- App Top Header with 3-Line Button -->
+        <header class="bg-white/95 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 border-b border-slate-200 flex items-center justify-between shadow-xs">
+          <div class="flex items-center gap-3">
+            <!-- 3-LINE (HAMBURGER) BUTTON -->
+            <button type="button" onclick="toggleMenu()" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 flex items-center justify-center text-slate-700 transition cursor-pointer">
+              <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+            
+            <div>
+              <div class="flex items-center gap-1.5">
+                <h1 class="text-sm sm:text-base font-bold text-slate-800">
+                  Welcome, <span id="header-user-name">Student</span>
+                </h1>
+              </div>
+              <p class="text-[11px] text-brand-500 font-medium" id="header-user-sem">Chemical Engineering</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <div onclick="switchTab('profile')" class="w-9 h-9 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-bold text-xs sm:text-sm cursor-pointer shadow-xs">
+              <span id="header-user-initials">CE</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dynamic Tabs Container (Max-Width Expanded for Large Screens) -->
+        <div class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-6xl mx-auto w-full">
+
+          <!-- TAB: HOME -->
+          <div id="tab-home" class="space-y-6">
+
+            <!-- 1. HERO BANNER: Fill screen elegantly on Laptops -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-900 via-brand-800 to-sky-700 text-white p-6 sm:p-8 shadow-lg shadow-brand-900/10">
+              <div class="absolute -right-6 -bottom-8 opacity-15 pointer-events-none">
+                <i class="fa-solid fa-flask-vial text-9xl"></i>
+              </div>
+              <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-white/15 backdrop-blur border border-white/20 text-sky-200 mb-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Student Academic Hub
+                  </span>
+                  <h2 class="text-xl sm:text-2xl font-black tracking-tight">Chemical Engineering Portal</h2>
+                  <p class="text-xs text-sky-100 mt-1 max-w-md">તમારા સેમેસ્ટરના વિષયો, યુનિટ વાઇઝ નોટ્સ અને ઓફિશિયલ પરિપત્રો અહીં ઉપલબ્ધ છે.</p>
+                </div>
+                <!-- Quick Stats Chips -->
+                <div class="flex items-center gap-3">
+                  <div class="px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur border border-white/15 text-center">
+                    <p class="text-[10px] uppercase font-bold text-sky-200">Current Sem</p>
+                    <p id="hero-sem-text" class="text-sm font-extrabold text-white mt-0.5">---</p>
+                  </div>
+                  <div class="px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur border border-white/15 text-center">
+                    <p class="text-[10px] uppercase font-bold text-sky-200">Total Subjects</p>
+                    <p id="hero-subject-count" class="text-sm font-extrabold text-sky-300 mt-0.5">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. ANNOUNCEMENTS SECTION (TOP) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm shadow-xs">
+                    <i class="fa-solid fa-bullhorn"></i>
+                  </div>
+                  <h3 class="text-sm sm:text-base font-bold text-slate-800">Latest Announcements</h3>
+                </div>
+                <span class="text-[11px] font-semibold text-slate-400">Live Notices</span>
+              </div>
+              <div id="student-announcements-list" class="space-y-2.5">
+                <p class="text-xs text-slate-400">Loading notices...</p>
+              </div>
+            </div>
+
+            <!-- 3. SUBJECTS SECTION (FULL-WIDTH MODERN CARDS) -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between px-1">
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold text-slate-800">Your Subjects</h3>
+                  <p class="text-xs text-slate-500">વિષય પર ક્લિક કરીને ફોલ્ડર-વાઈઝ મટિરિયલ જુઓ</p>
+                </div>
+                <span id="subject-count-badge" class="text-xs bg-brand-50 border border-brand-100 text-brand-700 px-3 py-1 rounded-full font-bold shadow-xs">
+                  0 Subjects
+                </span>
+              </div>
+
+              <!-- Responsive Subject Grid -->
+              <div id="subjects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-dashed border-slate-200">
+                  <i class="fa-solid fa-spinner fa-spin text-xl text-slate-400 mb-2"></i>
+                  <p class="text-xs font-semibold text-slate-600">Subjects load થઈ રહ્યા છે...</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- TAB: PROFILE -->
+          <div id="tab-profile" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-slate-200 max-w-xl mx-auto space-y-4">
+              <div class="flex items-center gap-3.5 pb-4 border-b border-slate-100">
+                <div class="w-14 h-14 rounded-2xl bg-brand-100 flex items-center justify-center text-brand-700 text-xl font-bold">
+                  <span id="tab-profile-initials">CE</span>
+                </div>
+                <div>
+                  <h3 id="tab-profile-name" class="text-base font-bold text-slate-800">Student Name</h3>
+                  <p id="tab-profile-email" class="text-xs text-slate-500">student@example.com</p>
+                </div>
+              </div>
+
+              <div class="space-y-3 text-xs">
+                <div class="p-3 bg-slate-50 rounded-xl">
+                  <span class="text-slate-400 uppercase tracking-wider block text-[10px]">Enrollment Number</span>
+                  <p id="tab-profile-enrollment" class="font-semibold text-slate-800 mt-0.5">----------</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl">
+                  <span class="text-slate-400 uppercase tracking-wider block text-[10px]">College</span>
+                  <p id="tab-profile-college" class="font-semibold text-slate-800 mt-0.5">----------</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl">
+                  <span class="text-slate-400 uppercase tracking-wider block text-[10px]">Semester</span>
+                  <p id="tab-profile-semester" class="font-semibold text-slate-800 mt-0.5">----------</p>
+                </div>
+                <button onclick="openProfileEditModal()" class="w-full py-2.5 bg-brand-50 text-brand-600 rounded-xl font-semibold text-xs transition mt-2">
+                  Edit Profile Details
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 4. FULL PAGE: SUBJECT MATERIAL DETAILS                         -->
+    <!-- ============================================================== -->
+    <section id="view-subject-detail" style="display:none;" class="flex-1 flex-col bg-slate-100 min-h-screen">
+      <!-- Header -->
+      <header class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 px-3.5 sm:px-8 py-3 flex items-center justify-between shadow-xs">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <button type="button" onclick="closeSubjectDetailPage()" class="w-9 h-9 rounded-xl bg-slate-100 active:bg-slate-200 flex items-center justify-center text-slate-700 shrink-0">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+          </button>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span id="detail-page-sem-badge" class="text-[9px] font-bold text-brand-600 bg-brand-50 px-1.5 py-0.5 rounded">SEM</span>
+              <span id="detail-page-code-badge" class="text-[9px] font-mono font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">CODE</span>
+            </div>
+            <h1 class="text-sm sm:text-lg font-bold text-slate-900 truncate mt-0.5" id="detail-page-subject-name">Subject Name</h1>
+          </div>
+        </div>
+        <button type="button" onclick="closeSubjectDetailPage()" class="shrink-0 px-3 py-1.5 bg-slate-100 active:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">
+          Back
+        </button>
+      </header>
+
+      <!-- Materials List Body -->
+      <div class="max-w-6xl mx-auto w-full p-4 sm:p-6 space-y-4">
+        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-3.5 flex items-center justify-between">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center text-sm shrink-0">
+              <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-xs font-bold text-slate-800">Folders & Files</h4>
+              <p class="text-[10px] text-slate-500 truncate">Notes, manuals and old papers.</p>
+            </div>
+          </div>
+          <span id="detail-page-files-count" class="text-[11px] font-bold text-brand-600 bg-white px-2.5 py-1 rounded-lg border border-sky-100 shrink-0">0 Files</span>
+        </div>
+
+        <!-- Rendered Folders Container -->
+        <div id="detail-page-materials-list" class="space-y-3.5">
+          <div class="py-12 text-center bg-white rounded-2xl border border-dashed border-slate-200">
+            <i class="fa-solid fa-spinner fa-spin text-xl text-slate-400 mb-2"></i>
+            <p class="text-xs font-semibold text-slate-600">Materials load થઈ રહ્યા છે...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- MODALS: FORGOT PASSWORD, EDIT PROFILE                          -->
+    <!-- ============================================================== -->
+
+    <!-- Forgot Password Modal -->
+    <div id="modal-forgot-password" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-5 sm:p-8 max-w-sm sm:max-w-md w-full shadow-2xl space-y-3.5">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <h3 class="font-bold text-base text-slate-800">Reset Password</h3>
+          <button onclick="closeForgotPasswordModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+        <p class="text-xs text-slate-500">
+          Enter your registered email address to receive password reset link.
+        </p>
+        <form onsubmit="event.preventDefault(); submitForgotPassword();" class="space-y-3">
+          <div>
+            <input type="email" id="forgot-email" required placeholder="student@example.com"
+              class="w-full px-3.5 py-2.5 border rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+          <div class="flex gap-2 pt-1">
+            <button type="button" onclick="closeForgotPasswordModal()" class="flex-1 py-2.5 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold">
+              Cancel
+            </button>
+            <button type="submit" class="flex-1 py-2.5 bg-brand-500 text-white rounded-xl text-xs font-semibold">
+              Send Link
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="modal-edit-profile" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-sm sm:max-w-md w-full shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto custom-scroll">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <h3 class="font-bold text-base text-slate-800">Edit Profile</h3>
+          <button onclick="closeProfileEditModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+        <form onsubmit="event.preventDefault(); submitEditProfile();" class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
+            <input type="text" id="edit-name" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Enrollment Number</label>
+            <input type="text" id="edit-enrollment" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">College Name</label>
+            <input type="text" id="edit-college" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Semester</label>
+            <select id="edit-semester" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="1st Semester">1st Semester</option>
+              <option value="2nd Semester">2nd Semester</option>
+              <option value="3rd Semester">3rd Semester</option>
+              <option value="4th Semester">4th Semester</option>
+              <option value="5th Semester">5th Semester</option>
+              <option value="6th Semester">6th Semester</option>
+              <option value="7th Semester">7th Semester</option>
+              <option value="8th Semester">8th Semester</option>
+            </select>
+          </div>
+          <div class="flex gap-2 pt-2">
+            <button type="button" onclick="closeProfileEditModal()" class="flex-1 py-2.5 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold">Cancel</button>
+            <button type="submit" class="flex-1 py-2.5 bg-brand-500 text-white rounded-xl text-xs font-semibold">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT & FIREBASE INTEGRATION -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword, 
+      sendPasswordResetEmail, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc, 
+      updateDoc,
+      collection,
+      query,
+      where,
+      onSnapshot 
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // -------------------------------------------------------------
+    // ⚙️ FIREBASE CONFIG (તમારો સાચો Config અહીં રહેશે)
+    // -------------------------------------------------------------
+    const firebaseConfig = {
+  apiKey: "AIzaSyD3tPpfRwxEKAPUGKvr0Md5vev-KRurwwc",
+  authDomain: "chem-eng-students-portal.firebaseapp.com",
+  projectId: "chem-eng-students-portal",
+  storageBucket: "chem-eng-students-portal.firebasestorage.app",
+  messagingSenderId: "378522193699",
+  appId: "1:378522193699:web:43ac49275038b4b2b98696",
+  measurementId: "G-DDQE1WDWYF"
+};
+
+    let app, auth, db;
+    let currentUser = null;
+    let currentStudentProfile = null;
+    let unsubSubjects = null;
+    let unsubAnnouncements = null;
+    let unsubMaterialsDetail = null;
+
+    // Hamburger Menu Toggle
+    window.toggleMenu = function() {
+      const menu = document.getElementById('side-menu');
+      const backdrop = document.getElementById('side-menu-backdrop');
+      if (!menu || !backdrop) return;
+
+      if (menu.classList.contains('-translate-x-full')) {
+        menu.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        menu.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    };
+
+    // Toast Notifications
+    window.showToast = function(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      
+      const theme = {
+        info: 'bg-slate-900 text-white',
+        success: 'bg-emerald-600 text-white',
+        error: 'bg-rose-600 text-white'
+      };
+
+      toast.className = `${theme[type] || theme.info} px-3.5 py-2 rounded-xl shadow-lg text-xs font-semibold flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info'} text-xs"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    };
+
+    // View Switcher
+    window.showView = function(viewId) {
+      const views = ['view-login', 'view-register', 'view-complete-profile', 'view-dashboard', 'view-subject-detail'];
+      views.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const target = document.getElementById(viewId);
+      if (target) {
+        target.style.display = 'flex';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function isFirebaseConfigured() {
+      return Boolean(
+        firebaseConfig && 
+        firebaseConfig.apiKey && 
+        !firebaseConfig.apiKey.includes("YourActualAPIKeyHere") &&
+        firebaseConfig.projectId && 
+        !firebaseConfig.projectId.includes("your-project-id")
+      );
+    }
+
+    // Load student profile & Decide View
+    async function loadStudentProfile(user) {
+      if (!user) {
+        window.showView('view-login');
+        return;
+      }
+
+      const cached = sessionStorage.getItem(`student_profile_${user.uid}`);
+      if (cached) {
+        try {
+          currentStudentProfile = JSON.parse(cached);
+          if (currentStudentProfile.isProfileComplete) {
+            renderDashboardUI(currentStudentProfile);
+            window.showView('view-dashboard');
+            return;
+          } else {
+            prefillCompleteProfileForm(currentStudentProfile);
+            window.showView('view-complete-profile');
+            return;
+          }
+        } catch (e) {}
+      }
+
+      if (db) {
+        try {
+          const docRef = doc(db, "students", user.uid);
+          const snap = await getDoc(docRef);
+          if (snap.exists()) {
+            currentStudentProfile = snap.data();
+            sessionStorage.setItem(`student_profile_${user.uid}`, JSON.stringify(currentStudentProfile));
+            
+            if (currentStudentProfile.isProfileComplete) {
+              renderDashboardUI(currentStudentProfile);
+              window.showView('view-dashboard');
+              return;
+            } else {
+              prefillCompleteProfileForm(currentStudentProfile);
+              window.showView('view-complete-profile');
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn("Firestore fetch notice:", err.message);
+        }
+      }
+
+      const fallback = {
+        fullName: user.displayName || user.email.split('@')[0],
+        email: user.email,
+        isProfileComplete: false
+      };
+      currentStudentProfile = fallback;
+      prefillCompleteProfileForm(fallback);
+      window.showView('view-complete-profile');
+    }
+
+    function prefillCompleteProfileForm(profile) {
+      const nameInput = document.getElementById('cp-fullname');
+      if (nameInput && profile.fullName) nameInput.value = profile.fullName;
+      if (profile.enrollment) document.getElementById('cp-enrollment').value = profile.enrollment;
+      if (profile.college) document.getElementById('cp-college').value = profile.college;
+      if (profile.semester) document.getElementById('cp-semester').value = profile.semester;
+    }
+
+    // Render Dashboard UI with Student Info
+    function renderDashboardUI(profile) {
+      if (!profile) return;
+      const firstName = (profile.fullName || 'Student').split(' ')[0];
+      const initials = (profile.fullName || 'CE')
+        .split(' ')
+        .filter(n => n.length > 0)
+        .map(n => n[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase() || 'CE';
+
+      // Header Bar
+      const headerName = document.getElementById('header-user-name');
+      const headerSem = document.getElementById('header-user-sem');
+      const headerInit = document.getElementById('header-user-initials');
+      if (headerName) headerName.textContent = firstName;
+      if (headerSem) headerSem.textContent = `${profile.semester || ''} - Chemical Engineering`;
+      if (headerInit) headerInit.textContent = initials;
+
+      // Hero Banner Sem Chip
+      const heroSem = document.getElementById('hero-sem-text');
+      if (heroSem) heroSem.textContent = profile.semester || 'Current';
+
+      // Profile Tab
+      const tabInit = document.getElementById('tab-profile-initials');
+      const tabName = document.getElementById('tab-profile-name');
+      const tabEmail = document.getElementById('tab-profile-email');
+      const tabEnroll = document.getElementById('tab-profile-enrollment');
+      const tabCollege = document.getElementById('tab-profile-college');
+      const tabSem = document.getElementById('tab-profile-semester');
+      if (tabInit) tabInit.textContent = initials;
+      if (tabName) tabName.textContent = profile.fullName || 'Student Name';
+      if (tabEmail) tabEmail.textContent = profile.email || currentUser?.email || 'student@example.com';
+      if (tabEnroll) tabEnroll.textContent = profile.enrollment || '----------';
+      if (tabCollege) tabCollege.textContent = profile.college || '----------';
+      if (tabSem) tabSem.textContent = profile.semester || '----------';
+
+      // Edit Profile Modal Inputs
+      const editName = document.getElementById('edit-name');
+      const editEnroll = document.getElementById('edit-enrollment');
+      const editCollege = document.getElementById('edit-college');
+      const editSem = document.getElementById('edit-semester');
+      if (editName) editName.value = profile.fullName || '';
+      if (editEnroll) editEnroll.value = profile.enrollment || '';
+      if (editCollege) editCollege.value = profile.college || '';
+      if (editSem && profile.semester) editSem.value = profile.semester;
+
+      if (profile.semester) {
+        loadStudentSubjects(profile.semester);
+      }
+      loadAnnouncements();
+    }
+
+    // -------------------------------------------------------------
+    // LIVE FETCH: SUBJECTS BY SEMESTER (WITH RICH CARD DESIGN)
+    // -------------------------------------------------------------
+    function loadStudentSubjects(semester) {
+      if (unsubSubjects) unsubSubjects();
+      const container = document.getElementById('subjects-container');
+      const countBadge = document.getElementById('subject-count-badge');
+      const heroCount = document.getElementById('hero-subject-count');
+      const heroSem = document.getElementById('hero-sem-text');
+      if (heroSem) heroSem.textContent = semester;
+      if (!container || !db) return;
+
+      const q = query(collection(db, "portal_subjects"), where("semester", "==", semester));
+
+      unsubSubjects = onSnapshot(q, (snapshot) => {
+        container.innerHTML = '';
+        if (countBadge) countBadge.textContent = `${snapshot.size} Subjects`;
+        if (heroCount) heroCount.textContent = snapshot.size;
+
+        if (snapshot.empty) {
+          container.innerHTML = `
+            <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-dashed border-slate-200">
+              <i class="fa-regular fa-folder-open text-3xl text-slate-300 mb-2"></i>
+              <h4 class="text-sm font-bold text-slate-700">${semester} માટે હજુ કોઈ વિષયો ઉમેરેલ નથી.</h4>
+              <p class="text-xs text-slate-400 mt-1">Admin પેનલ પરથી વિષયો ઉમેરવામાં આવશે એટલે અહીં લાઈવ દેખાશે.</p>
+            </div>
+          `;
+          return;
+        }
+
+        snapshot.forEach((docSnap) => {
+          const sub = docSnap.data();
+          const card = document.createElement('div');
+          card.className = "bg-white p-5 rounded-3xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between group";
+          
+          card.onclick = () => window.openSubjectDetailPage(sub.name, sub.code, semester);
+
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-sky-400 text-white flex items-center justify-center text-lg shadow-sm shadow-brand-500/20 group-hover:scale-105 transition">
+                  <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <span class="text-[11px] font-mono font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-xl">
+                  ${sub.code}
+                </span>
+              </div>
+              <h4 class="font-extrabold text-base text-slate-800 group-hover:text-brand-600 leading-snug tracking-tight">
+                ${sub.name}
+              </h4>
+              <p class="text-xs text-slate-400 mt-1">Chemical Engineering Department</p>
+            </div>
+
+            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-600 group-hover:text-brand-700">
+              <span>View Course Materials</span>
+              <span class="w-7 h-7 rounded-xl bg-brand-50 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </span>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }, (err) => {
+        console.error("Subjects fetch error:", err);
+        container.innerHTML = `<p class="text-xs text-rose-500 py-3 col-span-full">${err.message}</p>`;
+      });
+    }
+
+    // -------------------------------------------------------------
+    // FULL SCREEN SUBJECT DETAIL PAGE
+    // -------------------------------------------------------------
+    window.openSubjectDetailPage = function(subjectName, subjectCode, semester) {
+      document.getElementById('detail-page-subject-name').textContent = subjectName;
+      document.getElementById('detail-page-code-badge').textContent = subjectCode;
+      document.getElementById('detail-page-sem-badge').textContent = semester;
+
+      const listContainer = document.getElementById('detail-page-materials-list');
+      const filesCountBadge = document.getElementById('detail-page-files-count');
+      listContainer.innerHTML = `
+        <div class="py-12 text-center bg-white rounded-2xl border border-dashed border-slate-200">
+          <i class="fa-solid fa-spinner fa-spin text-xl text-slate-400 mb-2"></i>
+          <p class="text-xs font-semibold text-slate-600">Materials તપાસાઈ રહ્યા છે...</p>
+        </div>
+      `;
+
+      window.showView('view-subject-detail');
+
+      if (unsubMaterialsDetail) unsubMaterialsDetail();
+
+      const q = query(
+        collection(db, "portal_materials"),
+        where("semester", "==", semester),
+        where("subject", "==", subjectName)
+      );
+
+      unsubMaterialsDetail = onSnapshot(q, (snapshot) => {
+        listContainer.innerHTML = '';
+        if (filesCountBadge) filesCountBadge.textContent = `${snapshot.size} Files`;
+
+        if (snapshot.empty) {
+          listContainer.innerHTML = `
+            <div class="py-12 text-center bg-white rounded-2xl border border-dashed border-slate-200">
+              <i class="fa-regular fa-folder-open text-3xl text-slate-300 mb-2"></i>
+              <h4 class="text-sm font-bold text-slate-700">આ વિષય માટે હજુ કોઈ મટિરિયલ અપલોડ થયેલ નથી.</h4>
+              <p class="text-[11px] text-slate-400 mt-1">Admin જ્યારે સામગ્રી અપલોડ કરશે ત્યારે ફોલ્ડર વાઈઝ અહીં જોવા મળશે.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const groupedFolders = {};
+        snapshot.forEach((docSnap) => {
+          const file = { id: docSnap.id, ...docSnap.data() };
+          const folder = file.folder || 'General Notes';
+          if (!groupedFolders[folder]) groupedFolders[folder] = [];
+          groupedFolders[folder].push(file);
+        });
+
+        for (const [folderName, files] of Object.entries(groupedFolders)) {
+          const folderCard = document.createElement('div');
+          folderCard.className = "bg-white border border-slate-200 rounded-2xl p-4 shadow-2xs space-y-3";
+          
+          let filesListHtml = files.map(f => `
+            <div class="p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between gap-2.5">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-rose-500 flex items-center justify-center text-xs shrink-0">
+                  <i class="fa-regular fa-file-pdf"></i>
+                </div>
+                <div class="min-w-0">
+                  <h5 class="text-xs font-bold text-slate-800 truncate">${f.title}</h5>
+                  <p class="text-[10px] text-slate-400">Drive / PDF Link</p>
+                </div>
+              </div>
+              <a href="${f.url}" target="_blank" class="shrink-0 px-3 py-1.5 bg-brand-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1 active:scale-95">
+                <span>Open</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+              </a>
+            </div>
+          `).join('');
+
+          folderCard.innerHTML = `
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid fa-folder-closed text-amber-500 text-sm"></i>
+                <h4 class="font-bold text-xs sm:text-sm text-slate-800 truncate">${folderName}</h4>
+              </div>
+              <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full shrink-0">${files.length} Files</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+              ${filesListHtml}
+            </div>
+          `;
+          listContainer.appendChild(folderCard);
+        }
+      }, (err) => {
+        listContainer.innerHTML = `<p class="text-xs text-rose-500">${err.message}</p>`;
+      });
+    };
+
+    window.closeSubjectDetailPage = function() {
+      if (unsubMaterialsDetail) unsubMaterialsDetail();
+      window.showView('view-dashboard');
+    };
+
+    // -------------------------------------------------------------
+    // LIVE FETCH: ANNOUNCEMENTS
+    // -------------------------------------------------------------
+    function loadAnnouncements() {
+      if (unsubAnnouncements) unsubAnnouncements();
+      const list = document.getElementById('student-announcements-list');
+      if (!list || !db) return;
+
+      unsubAnnouncements = onSnapshot(collection(db, "portal_announcements"), (snap) => {
+        list.innerHTML = '';
+        if (snap.empty) {
+          list.innerHTML = `
+            <div class="p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 text-center">
+              <p class="text-xs text-slate-400">કોઈ નવી સૂચના કે નોટિસ નથી.</p>
+            </div>
+          `;
+          return;
+        }
+
+        snap.forEach((d) => {
+          const a = d.data();
+          const el = document.createElement('div');
+          el.className = "p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2";
+          el.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-brand-500 mt-1 shrink-0"></span>
+            <div class="min-w-0">
+              <h5 class="text-xs font-bold text-slate-800 truncate">${a.title}</h5>
+              <p class="text-[10px] text-slate-400">${a.date}</p>
+            </div>
+          `;
+          list.appendChild(el);
+        });
+      });
+    }
+
+    // -------------------------------------------------------------
+    // USER ACTIONS: REGISTER, LOGIN, PROFILE
+    // -------------------------------------------------------------
+    window.handleRegisterSubmit = async function() {
+      const fullName = document.getElementById('reg-fullname').value.trim();
+      const phone = document.getElementById('reg-phone').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const district = document.getElementById('reg-district').value.trim();
+      const state = document.getElementById('reg-state').value;
+      const termsAccepted = document.getElementById('reg-terms').checked;
+
+      if (!fullName || !phone || !email || !password || !district || !state) {
+        window.showToast('કૃપા કરીને બધી વિગતો ભરો.', 'error');
+        return;
+      }
+
+      if (!termsAccepted) {
+        window.showToast('Terms and Conditions સ્વીકારો.', 'error');
+        return;
+      }
+
+      const regBtn = document.getElementById('btn-register-submit');
+      regBtn.disabled = true;
+      document.getElementById('btn-register-text').textContent = 'Registering...';
+
+      const studentData = {
+        fullName,
+        phone: '+91 ' + phone.replace('+91', '').trim(),
+        email,
+        district,
+        state,
+        isProfileComplete: false,
+        role: 'student',
+        agreedToTerms: true,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        if (isFirebaseConfigured()) {
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          if (db) {
+            await setDoc(doc(db, "students", cred.user.uid), studentData);
+          }
+          await signOut(auth).catch(() => {});
+        }
+
+        sessionStorage.setItem(`student_profile_${email}`, JSON.stringify(studentData));
+        document.getElementById('login-email').value = email;
+        document.getElementById('form-register').reset();
+
+        showToast('Registration સફળ થયું! હવે Login કરો.', 'success');
+        showView('view-login');
+      } catch (err) {
+        console.error("Register Error:", err);
+        let msg = err.message || 'રજીસ્ટ્રેશનમાં ભૂલ આવી';
+        if (err.code === 'auth/email-already-in-use') {
+          msg = 'આ ઇમેઇલ પહેલેથી રજીસ્ટર છે.';
+        }
+        window.showToast(msg, 'error');
+      } finally {
+        regBtn.disabled = false;
+        document.getElementById('btn-register-text').textContent = 'Register';
+      }
+    };
+
+    window.handleLoginSubmit = async function() {
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        window.showToast('ઇમેઇલ અને પાસવર્ડ દાખલ કરો.', 'error');
+        return;
+      }
+
+      window.showToast('સાઇન ઇન થઈ રહ્યું છે...', 'info');
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        currentUser = cred.user;
+        window.showToast('Login સફળ થયું!', 'success');
+        await loadStudentProfile(currentUser);
+      } catch (err) {
+        console.error("Login error:", err);
+        window.showToast('ખોટો ઇમેઇલ અથવા પાસવર્ડ.', 'error');
+      }
+    };
+
+    window.handleCompleteProfileSubmit = async function() {
+      const fullName = document.getElementById('cp-fullname').value.trim();
+      const enrollment = document.getElementById('cp-enrollment').value.trim();
+      const college = document.getElementById('cp-college').value.trim();
+      const semester = document.getElementById('cp-semester').value;
+
+      if (!fullName || !enrollment || !college || !semester) {
+        window.showToast('કૃપા કરીને બધી વિગતો ભરો.', 'error');
+        return;
+      }
+
+      const cpBtn = document.getElementById('btn-cp-submit');
+      cpBtn.disabled = true;
+      document.getElementById('btn-cp-text').textContent = 'Saving...';
+
+      const updatedData = {
+        ...(currentStudentProfile || {}),
+        fullName,
+        enrollment,
+        college,
+        semester,
+        isProfileComplete: true,
+        updatedAt: new Date().toISOString()
+      };
+
+      currentStudentProfile = updatedData;
+      if (currentUser) {
+        sessionStorage.setItem(`student_profile_${currentUser.uid}`, JSON.stringify(updatedData));
+      }
+
+      if (db && currentUser) {
+        try {
+          await setDoc(doc(db, "students", currentUser.uid), updatedData, { merge: true });
+        } catch (e) {
+          console.warn("Could not save to Firestore:", e);
+        }
+      }
+
+      renderDashboardUI(currentStudentProfile);
+      window.showToast('પ્રોફાઇલ પૂર્ણ થઈ ગઈ!', 'success');
+      window.showView('view-dashboard');
+
+      cpBtn.disabled = false;
+      document.getElementById('btn-cp-text').textContent = 'Save and Continue';
+    };
+
+    window.acceptTermsAndReturn = function() {
+      const termsCheckbox = document.getElementById('reg-terms');
+      if (termsCheckbox) termsCheckbox.checked = true;
+      window.showView('view-register');
+    };
+
+    window.submitForgotPassword = async function() {
+      const email = document.getElementById('forgot-email').value.trim();
+      if (!email) {
+        window.showToast('ઇમેઇલ દાખલ કરો.', 'error');
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        window.showToast('પાસવર્ડ લિંક મોકલી દેવાઈ!', 'success');
+        window.closeForgotPasswordModal();
+      } catch (err) {
+        window.showToast(err.message || 'Error', 'error');
+      }
+    };
+
+    window.submitEditProfile = async function() {
+      const name = document.getElementById('edit-name').value.trim();
+      const enrollment = document.getElementById('edit-enrollment').value.trim();
+      const college = document.getElementById('edit-college').value.trim();
+      const semester = document.getElementById('edit-semester').value;
+
+      const updated = {
+        ...(currentStudentProfile || {}),
+        fullName: name,
+        enrollment,
+        college,
+        semester,
+        updatedAt: new Date().toISOString()
+      };
+
+      currentStudentProfile = updated;
+      if (currentUser) {
+        sessionStorage.setItem(`student_profile_${currentUser.uid}`, JSON.stringify(updated));
+      }
+
+      if (db && currentUser) {
+        try {
+          await updateDoc(doc(db, "students", currentUser.uid), updated);
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+
+      renderDashboardUI(currentStudentProfile);
+      window.closeProfileEditModal();
+      window.showToast('Profile updated!', 'success');
+    };
+
+    window.handleSignOut = async function() {
+      if (auth) {
+        try {
+          await signOut(auth);
+        } catch (e) {}
+      }
+      currentUser = null;
+      currentStudentProfile = null;
+      const menu = document.getElementById('side-menu');
+      if (menu && !menu.classList.contains('-translate-x-full')) {
+        toggleMenu();
+      }
+      window.showToast('Logout થઈ ગયું', 'info');
+      window.showView('view-login');
+    };
+
+    // Tab Navigation (Only Home & Profile)
+    window.switchTab = function(tabName) {
+      const tabs = ['home', 'profile'];
+      tabs.forEach(t => {
+        const tabContent = document.getElementById(`tab-${t}`);
+        const navBtn = document.getElementById(`nav-btn-${t}`);
+
+        if (t === tabName) {
+          tabContent?.classList.remove('hidden');
+          if (navBtn) navBtn.className = 'w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold text-sm transition bg-brand-600 text-white shadow-sm';
+        } else {
+          tabContent?.classList.add('hidden');
+          if (navBtn) navBtn.className = 'w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold text-sm transition text-white/75 hover:bg-white/10 hover:text-white';
+        }
+      });
+    };
+
+    window.openForgotPasswordModal = () => document.getElementById('modal-forgot-password')?.classList.remove('hidden');
+    window.closeForgotPasswordModal = () => document.getElementById('modal-forgot-password')?.classList.add('hidden');
+    window.openProfileEditModal = () => document.getElementById('modal-edit-profile')?.classList.remove('hidden');
+    window.closeProfileEditModal = () => document.getElementById('modal-edit-profile')?.classList.add('hidden');
+
+    window.togglePasswordVisibility = function(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) icon.className = 'fa-regular fa-eye';
+      } else {
+        input.type = 'password';
+        if (icon) icon.className = 'fa-regular fa-eye-slash';
+      }
+    };
+
+    // Initialize Firebase
+    function initFirebase() {
+      window.showView('view-login');
+
+      if (!isFirebaseConfigured()) {
+        console.warn("Firebase config not loaded yet.");
+        return;
+      }
+
+      try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        signOut(auth).catch(() => {});
+      } catch (err) {
+        console.error("Firebase init error:", err);
+      }
+    }
+
+    initFirebase();
+  </script>
+</body>
+</html>
