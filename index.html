@@ -2,7 +2,7 @@
 <html lang="gu" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Chemical Engineering - Student Portal</title>
 
   <!-- Tailwind CSS CDN -->
@@ -61,15 +61,15 @@
 <body class="h-full bg-slate-100 font-sans text-slate-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col">
 
   <!-- Toast Notification Box -->
-  <div id="toast-container" class="fixed top-4 left-4 right-4 sm:left-auto sm:right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <div id="toast-container" class="fixed top-3 left-4 right-4 sm:left-auto sm:right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <!-- MAIN WRAPPER -->
-  <div id="app" class="min-h-screen flex flex-col w-full relative">
+  <div id="app" class="h-full flex flex-col w-full relative">
 
     <!-- ============================================================== -->
-    <!-- 1. AUTH SCREEN: LOGIN PAGE                                     -->
+    <!-- 1. AUTH SCREEN: LOGIN PAGE (NO-SCROLL MOBILE FIT)              -->
     <!-- ============================================================== -->
-    <section id="view-login" class="flex flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen relative overflow-hidden">
+    <section id="view-login" class="flex flex-1 items-center justify-center px-4 py-2 sm:p-6 bg-slate-50 industrial-pattern h-[100dvh] overflow-hidden relative">
       
       <div class="hidden lg:block absolute bottom-0 left-8 w-72 opacity-25 pointer-events-none text-brand-900 select-none">
         <p class="font-script text-3xl text-brand-700 font-bold rotate-[-6deg] text-center leading-tight">Learn<br>Grow<br>Excel</p>
@@ -79,77 +79,74 @@
         <p class="font-script text-3xl text-brand-800 font-bold rotate-[-3deg] leading-tight">Engineering Today<br>for a Better Tomorrow</p>
       </div>
 
-      <!-- Login Card -->
-      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-10 relative z-10">
+      <!-- No-Scroll Compact Container -->
+      <div class="w-full max-w-xs sm:max-w-sm relative z-10 flex flex-col justify-center my-auto">
         
-        <div class="flex flex-col items-center text-center mb-6">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-brand-800 to-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 mb-3 relative">
-            <i class="fa-solid fa-gear text-3xl sm:text-4xl opacity-30 absolute animate-spin" style="animation-duration: 20s;"></i>
-            <i class="fa-solid fa-flask-vial text-2xl sm:text-3xl relative z-10 text-white"></i>
+        <!-- Big Brand Logo -->
+        <div class="flex flex-col items-center text-center mb-3 sm:mb-4">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-brand-800 via-brand-600 to-sky-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 mb-2 relative shrink-0">
+            <i class="fa-solid fa-gear text-3xl sm:text-4xl opacity-20 absolute animate-spin" style="animation-duration: 20s;"></i>
+            <i class="fa-solid fa-flask-vial text-2xl sm:text-3xl relative z-10 text-white drop-shadow-md"></i>
           </div>
-          <h1 class="text-xl sm:text-2xl font-extrabold text-brand-900 tracking-tight">Chemical Engineering</h1>
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-500 mt-0.5">Student Portal</p>
-          <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] text-slate-400 mt-1">
-            <span>Learn</span> • <span>Explore</span> • <span>Perform</span>
-          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-brand-900 tracking-tight leading-tight">Chemical Engineering</h1>
+          <p class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-500 mt-0.5">Student Portal</p>
         </div>
 
-        <div class="text-center mb-5">
-          <h2 class="text-lg sm:text-xl font-bold text-slate-800">Welcome Back</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Login to access your account</p>
+        <div class="text-center mb-3">
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-800">Welcome Back</h2>
+          <p class="text-[11px] text-slate-500">પોતાના એકાઉન્ટમાં સાઇન ઇન કરો</p>
         </div>
 
         <!-- Login Form -->
-        <form id="form-login" class="space-y-4" onsubmit="event.preventDefault(); handleLoginSubmit();">
+        <form id="form-login" class="space-y-2.5 sm:space-y-3" onsubmit="event.preventDefault(); handleLoginSubmit();">
           <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+            <label class="block text-[11px] font-semibold text-slate-600 mb-0.5">Email Address</label>
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm">
                 <i class="fa-regular fa-envelope"></i>
               </span>
               <input type="email" id="login-email" required placeholder="student@example.com"
-                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-slate-50/50">
+                class="w-full pl-9 pr-3.5 py-2 sm:py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
             </div>
           </div>
 
           <div>
-            <div class="flex items-center justify-between mb-1">
-              <label class="block text-xs font-semibold text-slate-600">Password</label>
-              <button type="button" onclick="openForgotPasswordModal()" class="text-[11px] font-semibold text-brand-500 hover:text-brand-700 transition hover:underline">
-                Forgot Password?
+            <div class="flex items-center justify-between mb-0.5">
+              <label class="block text-[11px] font-semibold text-slate-600">Password</label>
+              <button type="button" onclick="openForgotPasswordModal()" class="text-[11px] font-semibold text-brand-600 hover:text-brand-700 transition">
+                Forgot?
               </button>
             </div>
             <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-sm">
                 <i class="fa-solid fa-lock"></i>
               </span>
               <input type="password" id="login-password" required placeholder="••••••••"
-                class="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-slate-50/50">
-              <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
-                <i class="fa-regular fa-eye"></i>
+                class="w-full pl-9 pr-9 py-2 sm:py-2.5 rounded-xl border border-slate-200 bg-white text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
+              <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                <i class="fa-regular fa-eye text-xs"></i>
               </button>
             </div>
           </div>
 
           <button type="submit" id="btn-login-submit"
-            class="w-full py-3.5 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-semibold rounded-xl shadow-lg shadow-brand-500/25 transition flex items-center justify-center gap-2 cursor-pointer mt-2">
+            class="w-full py-2.5 sm:py-3 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-bold rounded-xl shadow-md shadow-brand-500/25 transition flex items-center justify-center gap-2 cursor-pointer text-xs sm:text-sm mt-1">
             <span>Login</span>
             <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
           </button>
         </form>
 
-        <div class="relative my-6 text-center">
+        <div class="relative my-3 text-center">
           <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-slate-200"></div>
           </div>
-          <span class="relative bg-white px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">OR</span>
+          <span class="relative bg-slate-50 px-2 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">OR</span>
         </div>
 
         <div class="text-center">
-          <p class="text-xs text-slate-500 mb-2">New user?</p>
           <button type="button" onclick="showView('view-register')"
-            class="w-full py-2.5 px-4 border border-brand-500 text-brand-600 hover:bg-brand-50 active:bg-brand-100 font-semibold rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm cursor-pointer">
-            <i class="fa-regular fa-user"></i>
+            class="w-full py-2 sm:py-2.5 px-4 border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer">
+            <i class="fa-regular fa-user text-xs"></i>
             <span>Register a new account</span>
           </button>
         </div>
@@ -158,26 +155,26 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- 2. REGISTER ACCOUNT SCREEN                                     -->
+    <!-- 2. REGISTER SCREEN                                             -->
     <!-- ============================================================== -->
-    <section id="view-register" style="display:none;" class="flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen">
+    <section id="view-register" style="display:none;" class="flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen overflow-y-auto">
       
-      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-8 relative z-10">
+      <div class="w-full max-w-sm sm:max-w-md relative z-10 my-auto py-4">
         
-        <div class="flex items-center gap-3 pb-3 mb-2 border-b border-slate-100">
-          <button type="button" onclick="showView('view-login')" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer">
-            <i class="fa-solid fa-arrow-left text-sm"></i>
+        <div class="flex items-center gap-3 pb-3 mb-3 border-b border-slate-200">
+          <button type="button" onclick="showView('view-login')" class="w-8 h-8 rounded-full bg-white border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
           </button>
-          <h2 class="text-lg font-bold text-slate-800">Register Account</h2>
+          <h2 class="text-lg font-black text-slate-800">Register Account</h2>
         </div>
 
-        <form id="form-register" class="space-y-3.5 mt-3" onsubmit="event.preventDefault(); handleRegisterSubmit();">
+        <form id="form-register" class="space-y-3" onsubmit="event.preventDefault(); handleRegisterSubmit();">
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-regular fa-user text-sm"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+              <i class="fa-regular fa-user"></i>
             </span>
             <input type="text" id="reg-fullname" required placeholder="Enter Full Name"
-              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+              class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div class="relative flex items-center">
@@ -185,42 +182,42 @@
               +91
             </span>
             <input type="tel" id="reg-phone" required pattern="[0-9]{10}" maxlength="10" placeholder="Enter Phone Number"
-              class="w-full pl-12 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+              class="w-full pl-11 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-regular fa-envelope text-sm"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+              <i class="fa-regular fa-envelope"></i>
             </span>
             <input type="email" id="reg-email" required placeholder="Enter E - Mail Address"
-              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+              class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-lock text-sm"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+              <i class="fa-solid fa-lock"></i>
             </span>
             <input type="password" id="reg-password" required minlength="6" placeholder="Enter Password"
-              class="w-full pl-10 pr-10 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
-            <button type="button" onclick="togglePasswordVisibility('reg-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
-              <i class="fa-regular fa-eye-slash text-sm"></i>
+              class="w-full pl-9 pr-9 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
+            <button type="button" onclick="togglePasswordVisibility('reg-password', this)" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+              <i class="fa-regular fa-eye-slash text-xs"></i>
             </button>
           </div>
 
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-location-dot text-sm"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+              <i class="fa-solid fa-location-dot"></i>
             </span>
             <input type="text" id="reg-district" required placeholder="Enter District"
-              class="w-full pl-10 pr-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition">
+              class="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <i class="fa-solid fa-map-location-dot text-sm"></i>
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs">
+              <i class="fa-solid fa-map-location-dot"></i>
             </span>
             <select id="reg-state" required
-              class="w-full pl-10 pr-10 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-800 focus:bg-white transition appearance-none cursor-pointer">
+              class="w-full pl-9 pr-9 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition appearance-none cursor-pointer">
               <option value="" disabled selected>State</option>
               <option value="Gujarat">Gujarat</option>
               <option value="Maharashtra">Maharashtra</option>
@@ -228,30 +225,30 @@
               <option value="Madhya Pradesh">Madhya Pradesh</option>
               <option value="Other">Other</option>
             </select>
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+            <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
               <i class="fa-solid fa-chevron-down text-xs"></i>
             </span>
           </div>
 
-          <div class="flex items-center gap-2.5 pt-1 px-1">
+          <div class="flex items-center gap-2 pt-1 px-1">
             <input type="checkbox" id="reg-terms" required
-              class="w-4 h-4 rounded text-slate-900 border-slate-300 focus:ring-slate-800 cursor-pointer">
+              class="w-4 h-4 rounded text-brand-600 border-slate-300 focus:ring-brand-500 cursor-pointer">
             <label for="reg-terms" class="text-xs text-slate-700 select-none">
-              I agree with <button type="button" onclick="showView('view-terms')" class="text-brand-600 font-semibold underline hover:text-brand-800">Terms and Conditions</button>
+              I agree with <button type="button" onclick="openTermsModal()" class="text-brand-600 font-bold underline hover:text-brand-800">Terms and Conditions</button>
             </label>
           </div>
 
-          <div class="pt-2">
+          <div class="pt-1">
             <button type="submit" id="btn-register-submit"
-              class="w-full py-3.5 px-4 bg-slate-900 hover:bg-black active:scale-[0.98] text-white font-bold rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-sm">
+              class="w-full py-3 px-4 bg-slate-900 hover:bg-black active:scale-[0.98] text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer text-sm">
               <span id="btn-register-text">Register</span>
             </button>
           </div>
         </form>
 
-        <p class="text-xs text-center text-slate-500 mt-4">
+        <p class="text-xs text-center text-slate-500 mt-3">
           Already registered? 
-          <button type="button" onclick="showView('view-login')" class="text-brand-600 font-semibold hover:underline ml-1">Login here</button>
+          <button type="button" onclick="showView('view-login')" class="text-brand-600 font-bold hover:underline ml-1">Login here</button>
         </p>
 
       </div>
@@ -261,40 +258,40 @@
     <!-- 2B. COMPLETE YOUR PROFILE SCREEN                               -->
     <!-- ============================================================== -->
     <section id="view-complete-profile" style="display:none;" class="flex-1 items-center justify-center p-4 sm:p-6 bg-slate-50 industrial-pattern min-h-screen">
-      <div class="w-full max-w-md bg-white rounded-3xl shadow-xl sm:shadow-2xl border border-sky-100 p-6 sm:p-8 relative z-10">
+      <div class="w-full max-w-sm sm:max-w-md relative z-10 my-auto py-6">
         
-        <div class="flex flex-col items-center text-center mb-6">
-          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-lg mb-3">
-            <i class="fa-solid fa-graduation-cap text-2xl"></i>
+        <div class="flex flex-col items-center text-center mb-5">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md mb-2.5">
+            <i class="fa-solid fa-graduation-cap text-xl"></i>
           </div>
-          <h2 class="text-lg sm:text-xl font-black text-slate-800">Complete Your Profile</h2>
+          <h2 class="text-lg font-black text-slate-800">Complete Your Profile</h2>
           <p class="text-xs text-slate-500 mt-0.5">Select your Semester to see your subjects</p>
         </div>
 
-        <form id="form-complete-profile" class="space-y-3.5" onsubmit="event.preventDefault(); handleCompleteProfileSubmit();">
+        <form id="form-complete-profile" class="space-y-3" onsubmit="event.preventDefault(); handleCompleteProfileSubmit();">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name *</label>
             <input type="text" id="cp-fullname" required placeholder="Enter your full name"
-              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+              class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Enrollment Number *</label>
             <input type="text" id="cp-enrollment" required placeholder="Enter your enrollment number"
-              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+              class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">College Name *</label>
             <input type="text" id="cp-college" required placeholder="Enter your college name"
-              class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+              class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition">
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Semester *</label>
             <div class="relative">
               <select id="cp-semester" required
-                class="w-full px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition appearance-none cursor-pointer">
+                class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs transition appearance-none cursor-pointer">
                 <option value="" disabled>Select your semester</option>
                 <option value="1st Semester">1st Semester</option>
                 <option value="2nd Semester">2nd Semester</option>
@@ -311,9 +308,9 @@
             </div>
           </div>
 
-          <div class="pt-2">
+          <div class="pt-1.5">
             <button type="submit" id="btn-cp-submit"
-              class="w-full py-3.5 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-bold rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer text-sm">
+              class="w-full py-3 px-4 bg-brand-500 hover:bg-brand-600 active:scale-[0.98] text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer text-sm">
               <span id="btn-cp-text">Save and Continue</span>
               <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
@@ -323,48 +320,15 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- 2C. TERMS & CONDITIONS VIEW                                    -->
-    <!-- ============================================================== -->
-    <section id="view-terms" style="display:none;" class="flex-1 flex-col bg-slate-50 min-h-screen">
-      <header class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 px-4 py-3.5 flex items-center justify-between shadow-xs">
-        <div class="flex items-center gap-3">
-          <button type="button" onclick="showView('view-register')" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
-            <i class="fa-solid fa-arrow-left text-sm"></i>
-          </button>
-          <div>
-            <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Terms & Conditions</h1>
-          </div>
-        </div>
-        <button type="button" onclick="acceptTermsAndReturn()" class="px-3.5 py-1.5 bg-brand-500 text-white text-xs font-semibold rounded-xl">
-          I Agree
-        </button>
-      </header>
-
-      <div class="max-w-4xl mx-auto w-full p-4 sm:p-6 space-y-4 text-slate-700 text-sm">
-        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-4 text-xs text-sky-800">
-          <i class="fa-solid fa-shield-halved mr-1 text-brand-500"></i>
-          <strong>વિદ્યાર્થી આચારસંહિતા અને શરતો</strong>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 space-y-2">
-          <h2 class="text-sm font-bold text-slate-900">પ્રસ્તાવના અને માન્યતા</h2>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            આ પોર્ટલ Chemical Engineering ના વિદ્યાર્થીઓને શૈક્ષણિક વિષયો, અભ્યાસ સામગ્રી અને લેબ મેન્યુઅલ ઉપલબ્ધ કરાવવા માટે બનાવવામાં આવ્યું છે.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================== -->
     <!-- 3. STUDENT DASHBOARD SCREEN                                    -->
     <!-- ============================================================== -->
     <div id="view-dashboard" style="display:none;" class="flex-1 flex-col h-screen overflow-hidden bg-slate-100 relative">
 
-      <!-- SLIDE-OVER SIDEBAR MENU (TRIGGERED BY 3-LINE BUTTON) -->
+      <!-- SLIDE-OVER SIDEBAR MENU -->
       <div id="side-menu-backdrop" onclick="toggleMenu()" class="fixed inset-0 bg-black/60 z-40 hidden transition-opacity"></div>
       
       <aside id="side-menu" class="fixed top-0 left-0 bottom-0 w-72 max-w-[85vw] bg-brand-900 text-white z-50 flex flex-col justify-between p-6 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
         <div>
-          <!-- Sidebar Header -->
           <div class="flex items-center justify-between pb-5 border-b border-white/10">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-brand-700/80 border border-white/20 flex items-center justify-center text-sky-300">
@@ -380,7 +344,6 @@
             </button>
           </div>
 
-          <!-- Navigation Links (Home, Profile) -->
           <nav class="mt-6 space-y-2">
             <button onclick="switchTab('home'); toggleMenu();" id="nav-btn-home" class="w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-semibold text-sm transition bg-brand-600 text-white shadow-sm">
               <i class="fa-solid fa-house w-5 text-center text-base"></i>
@@ -393,7 +356,6 @@
           </nav>
         </div>
 
-        <!-- Sidebar Footer -->
         <div class="pt-4 border-t border-white/10">
           <button onclick="handleSignOut()" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-semibold text-sm text-rose-200 hover:bg-rose-500/20 transition cursor-pointer">
             <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
@@ -405,10 +367,8 @@
       <!-- MAIN SCROLLABLE CONTENT -->
       <main class="flex-1 flex flex-col overflow-y-auto custom-scroll relative">
         
-        <!-- App Top Header with 3-Line Button -->
         <header class="bg-white/95 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 border-b border-slate-200 flex items-center justify-between shadow-xs">
           <div class="flex items-center gap-3">
-            <!-- 3-LINE (HAMBURGER) BUTTON -->
             <button type="button" onclick="toggleMenu()" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 flex items-center justify-center text-slate-700 transition cursor-pointer">
               <i class="fa-solid fa-bars text-lg"></i>
             </button>
@@ -430,13 +390,12 @@
           </div>
         </header>
 
-        <!-- Dynamic Tabs Container (Max-Width Expanded for Large Screens) -->
         <div class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-6xl mx-auto w-full">
 
           <!-- TAB: HOME -->
           <div id="tab-home" class="space-y-6">
 
-            <!-- 1. HERO BANNER: Fill screen elegantly on Laptops -->
+            <!-- 1. HERO BANNER -->
             <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-900 via-brand-800 to-sky-700 text-white p-6 sm:p-8 shadow-lg shadow-brand-900/10">
               <div class="absolute -right-6 -bottom-8 opacity-15 pointer-events-none">
                 <i class="fa-solid fa-flask-vial text-9xl"></i>
@@ -449,7 +408,6 @@
                   <h2 class="text-xl sm:text-2xl font-black tracking-tight">Chemical Engineering Portal</h2>
                   <p class="text-xs text-sky-100 mt-1 max-w-md">તમારા સેમેસ્ટરના વિષયો, યુનિટ વાઇઝ નોટ્સ અને ઓફિશિયલ પરિપત્રો અહીં ઉપલબ્ધ છે.</p>
                 </div>
-                <!-- Quick Stats Chips -->
                 <div class="flex items-center gap-3">
                   <div class="px-4 py-2.5 rounded-2xl bg-white/10 backdrop-blur border border-white/15 text-center">
                     <p class="text-[10px] uppercase font-bold text-sky-200">Current Sem</p>
@@ -463,7 +421,7 @@
               </div>
             </div>
 
-            <!-- 2. ANNOUNCEMENTS SECTION (TOP) -->
+            <!-- 2. ANNOUNCEMENTS SECTION -->
             <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm">
               <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2.5">
@@ -479,7 +437,7 @@
               </div>
             </div>
 
-            <!-- 3. SUBJECTS SECTION (FULL-WIDTH MODERN CARDS) -->
+            <!-- 3. SUBJECTS SECTION -->
             <div class="space-y-4">
               <div class="flex items-center justify-between px-1">
                 <div>
@@ -491,7 +449,7 @@
                 </span>
               </div>
 
-              <!-- Responsive Subject Grid -->
+              <!-- Subjects Grid -->
               <div id="subjects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-dashed border-slate-200">
                   <i class="fa-solid fa-spinner fa-spin text-xl text-slate-400 mb-2"></i>
@@ -544,7 +502,6 @@
     <!-- 4. FULL PAGE: SUBJECT MATERIAL DETAILS                         -->
     <!-- ============================================================== -->
     <section id="view-subject-detail" style="display:none;" class="flex-1 flex-col bg-slate-100 min-h-screen">
-      <!-- Header -->
       <header class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 px-3.5 sm:px-8 py-3 flex items-center justify-between shadow-xs">
         <div class="flex items-center gap-2.5 min-w-0">
           <button type="button" onclick="closeSubjectDetailPage()" class="w-9 h-9 rounded-xl bg-slate-100 active:bg-slate-200 flex items-center justify-center text-slate-700 shrink-0">
@@ -563,7 +520,6 @@
         </button>
       </header>
 
-      <!-- Materials List Body -->
       <div class="max-w-6xl mx-auto w-full p-4 sm:p-6 space-y-4">
         <div class="bg-sky-50 border border-sky-100 rounded-2xl p-3.5 flex items-center justify-between">
           <div class="flex items-center gap-2.5 min-w-0">
@@ -578,7 +534,6 @@
           <span id="detail-page-files-count" class="text-[11px] font-bold text-brand-600 bg-white px-2.5 py-1 rounded-lg border border-sky-100 shrink-0">0 Files</span>
         </div>
 
-        <!-- Rendered Folders Container -->
         <div id="detail-page-materials-list" class="space-y-3.5">
           <div class="py-12 text-center bg-white rounded-2xl border border-dashed border-slate-200">
             <i class="fa-solid fa-spinner fa-spin text-xl text-slate-400 mb-2"></i>
@@ -589,15 +544,66 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- MODALS: FORGOT PASSWORD, EDIT PROFILE                          -->
+    <!-- 5. TERMS & CONDITIONS MODAL                                    -->
+    <!-- ============================================================== -->
+    <div id="modal-terms" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl max-h-[85vh] flex flex-col space-y-4">
+        
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-base">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-800">Terms and Conditions</h3>
+              <p class="text-[11px] text-slate-400">Chemical Engineering Student Portal</p>
+            </div>
+          </div>
+          <button onclick="closeTermsModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 transition">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+
+        <div class="overflow-y-auto custom-scroll pr-1 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed flex-1">
+          <div class="bg-sky-50 border border-sky-100 rounded-2xl p-4 text-sky-800 font-medium">
+            આ પોર્ટલ Chemical Engineering ના વિદ્યાર્થીઓને શૈક્ષણિક વિષયો, અભ્યાસ સામગ્રી, લેબ મેન્યુઅલ અને નોટિસ ઉપલબ્ધ કરાવવા માટે બનાવવામાં આવ્યું છે.
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-bold text-slate-800 text-sm">1. User Account & Security</h4>
+            <p>પોતાનો ઇમેઇલ અને પાસવર્ડ સુરક્ષિત રાખવો એ વિદ્યાર્થીની જવાબદારી છે. કોઈ પણ ખોટી વિગત કે ફેક એનરોલમેન્ટ નંબર દાખલ કરવો નહીં.</p>
+
+            <h4 class="font-bold text-slate-800 text-sm">2. Academic Materials Use</h4>
+            <p>પોર્ટલ પર ઉપલબ્ધ તમામ PDF, લેબ મેન્યુઅલ અને જૂના પ્રશ્નપત્રો ફક્ત અભ્યાસના હેતુ માટે જ વાપરી શકાશે.</p>
+
+            <h4 class="font-bold text-slate-800 text-sm">3. Portal Discipline</h4>
+            <p>પોર્ટલના નિયમોનું પાલન કરવું દરેક વિદ્યાર્થી માટે ફરજિયાત છે.</p>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-3 shrink-0">
+          <button type="button" onclick="closeTermsModal()" class="px-5 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold hover:bg-slate-50 transition">
+            Close
+          </button>
+          <button type="button" onclick="acceptTermsFromModal()" class="px-6 py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5">
+            <i class="fa-solid fa-check"></i>
+            <span>I Agree & Accept</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- FORGOT PASSWORD & EDIT PROFILE MODALS                          -->
     <!-- ============================================================== -->
 
     <!-- Forgot Password Modal -->
     <div id="modal-forgot-password" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-white rounded-3xl p-5 sm:p-8 max-w-sm sm:max-w-md w-full shadow-2xl space-y-3.5">
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="bg-white rounded-3xl p-6 max-w-sm sm:max-w-md w-full shadow-2xl space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <h3 class="font-bold text-base text-slate-800">Reset Password</h3>
-          <button onclick="closeForgotPasswordModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+          <button onclick="closeForgotPasswordModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
             <i class="fa-solid fa-xmark text-xs"></i>
           </button>
         </div>
@@ -607,9 +613,9 @@
         <form onsubmit="event.preventDefault(); submitForgotPassword();" class="space-y-3">
           <div>
             <input type="email" id="forgot-email" required placeholder="student@example.com"
-              class="w-full px-3.5 py-2.5 border rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              class="w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
           </div>
-          <div class="flex gap-2 pt-1">
+          <div class="flex gap-2 pt-2">
             <button type="button" onclick="closeForgotPasswordModal()" class="flex-1 py-2.5 border border-slate-300 text-slate-600 rounded-xl text-xs font-semibold">
               Cancel
             </button>
@@ -623,29 +629,29 @@
 
     <!-- Edit Profile Modal -->
     <div id="modal-edit-profile" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-sm sm:max-w-md w-full shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto custom-scroll">
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="bg-white rounded-3xl p-6 max-w-sm sm:max-w-md w-full shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto custom-scroll">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <h3 class="font-bold text-base text-slate-800">Edit Profile</h3>
-          <button onclick="closeProfileEditModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+          <button onclick="closeProfileEditModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
             <i class="fa-solid fa-xmark text-xs"></i>
           </button>
         </div>
         <form onsubmit="event.preventDefault(); submitEditProfile();" class="space-y-3">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
-            <input type="text" id="edit-name" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <input type="text" id="edit-name" required class="w-full px-3.5 py-2.5 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Enrollment Number</label>
-            <input type="text" id="edit-enrollment" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <input type="text" id="edit-enrollment" required class="w-full px-3.5 py-2.5 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">College Name</label>
-            <input type="text" id="edit-college" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <input type="text" id="edit-college" required class="w-full px-3.5 py-2.5 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Semester</label>
-            <select id="edit-semester" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <select id="edit-semester" required class="w-full px-3.5 py-2.5 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
               <option value="1st Semester">1st Semester</option>
               <option value="2nd Semester">2nd Semester</option>
               <option value="3rd Semester">3rd Semester</option>
@@ -689,7 +695,7 @@
     } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // -------------------------------------------------------------
-    // ⚙️ FIREBASE CONFIG (તમારો સાચો Config અહીં રહેશે)
+    // ⚙️ FIREBASE CONFIG
     // -------------------------------------------------------------
     const firebaseConfig = {
   apiKey: "AIzaSyD3tPpfRwxEKAPUGKvr0Md5vev-KRurwwc",
@@ -707,6 +713,16 @@
     let unsubSubjects = null;
     let unsubAnnouncements = null;
     let unsubMaterialsDetail = null;
+
+    // Terms Modal Open / Close
+    window.openTermsModal = () => document.getElementById('modal-terms')?.classList.remove('hidden');
+    window.closeTermsModal = () => document.getElementById('modal-terms')?.classList.add('hidden');
+    window.acceptTermsFromModal = function() {
+      const checkbox = document.getElementById('reg-terms');
+      if (checkbox) checkbox.checked = true;
+      window.closeTermsModal();
+      window.showToast("Terms and Conditions સ્વીકારી લીધી છે.", "info");
+    };
 
     // Hamburger Menu Toggle
     window.toggleMenu = function() {
@@ -851,7 +867,6 @@
         .substring(0, 2)
         .toUpperCase() || 'CE';
 
-      // Header Bar
       const headerName = document.getElementById('header-user-name');
       const headerSem = document.getElementById('header-user-sem');
       const headerInit = document.getElementById('header-user-initials');
@@ -859,11 +874,9 @@
       if (headerSem) headerSem.textContent = `${profile.semester || ''} - Chemical Engineering`;
       if (headerInit) headerInit.textContent = initials;
 
-      // Hero Banner Sem Chip
       const heroSem = document.getElementById('hero-sem-text');
       if (heroSem) heroSem.textContent = profile.semester || 'Current';
 
-      // Profile Tab
       const tabInit = document.getElementById('tab-profile-initials');
       const tabName = document.getElementById('tab-profile-name');
       const tabEmail = document.getElementById('tab-profile-email');
@@ -877,7 +890,6 @@
       if (tabCollege) tabCollege.textContent = profile.college || '----------';
       if (tabSem) tabSem.textContent = profile.semester || '----------';
 
-      // Edit Profile Modal Inputs
       const editName = document.getElementById('edit-name');
       const editEnroll = document.getElementById('edit-enrollment');
       const editCollege = document.getElementById('edit-college');
@@ -894,7 +906,7 @@
     }
 
     // -------------------------------------------------------------
-    // LIVE FETCH: SUBJECTS BY SEMESTER (WITH RICH CARD DESIGN)
+    // LIVE FETCH: SUBJECTS BY SEMESTER
     // -------------------------------------------------------------
     function loadStudentSubjects(semester) {
       if (unsubSubjects) unsubSubjects();
@@ -1226,12 +1238,6 @@
       document.getElementById('btn-cp-text').textContent = 'Save and Continue';
     };
 
-    window.acceptTermsAndReturn = function() {
-      const termsCheckbox = document.getElementById('reg-terms');
-      if (termsCheckbox) termsCheckbox.checked = true;
-      window.showView('view-register');
-    };
-
     window.submitForgotPassword = async function() {
       const email = document.getElementById('forgot-email').value.trim();
       if (!email) {
@@ -1297,7 +1303,7 @@
       window.showView('view-login');
     };
 
-    // Tab Navigation (Only Home & Profile)
+    // Tab Navigation
     window.switchTab = function(tabName) {
       const tabs = ['home', 'profile'];
       tabs.forEach(t => {
